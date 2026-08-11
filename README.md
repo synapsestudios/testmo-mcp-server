@@ -21,20 +21,19 @@ Write tools return `403` if the token's role lacks the required access. Assign t
 
 ## Setup
 
-### 1. Install dependencies
+### Option A: Run via npx (recommended)
+
+No install or build step required — `npx` fetches and runs the published package on demand. Skip to [Registering with Claude Desktop](#registering-with-claude-desktop) below.
+
+### Option B: Clone and build locally
 
 ```bash
-cd testmo-mcp
+cd testmo-mcp-server
 npm install
-```
-
-### 2. Build
-
-```bash
 npm run build
 ```
 
-### 3. Environment variables
+### Environment variables
 
 | Variable | Description | Default |
 |---|---|---|
@@ -52,12 +51,14 @@ TESTMO_API_TOKEN=your_token_here TESTMO_BASE_URL=https://your-instance.testmo.ne
 
 Add the following block to your `claude_desktop_config.json` (typically at `~/Library/Application Support/Claude/claude_desktop_config.json` on macOS or `%APPDATA%\Claude\claude_desktop_config.json` on Windows):
 
+**Via npx (no local install needed):**
+
 ```json
 {
   "mcpServers": {
     "testmo": {
-      "command": "node",
-      "args": ["/ABSOLUTE/PATH/TO/testmo-mcp/dist/index.js"],
+      "command": "npx",
+      "args": ["-y", "@synapsestudios/testmo-mcp-server@latest"],
       "env": {
         "TESTMO_API_TOKEN": "your_testmo_api_token_here",
         "TESTMO_BASE_URL": "https://your-instance.testmo.net"
@@ -67,7 +68,24 @@ Add the following block to your `claude_desktop_config.json` (typically at `~/Li
 }
 ```
 
-Replace `/ABSOLUTE/PATH/TO/testmo-mcp` with the actual path where you cloned/placed this project.
+**Via a local clone/build:**
+
+```json
+{
+  "mcpServers": {
+    "testmo": {
+      "command": "node",
+      "args": ["/ABSOLUTE/PATH/TO/testmo-mcp-server/dist/index.js"],
+      "env": {
+        "TESTMO_API_TOKEN": "your_testmo_api_token_here",
+        "TESTMO_BASE_URL": "https://your-instance.testmo.net"
+      }
+    }
+  }
+}
+```
+
+Replace `/ABSOLUTE/PATH/TO/testmo-mcp-server` with the actual path where you cloned/placed this project.
 
 **Restart Claude Desktop** after saving the config for the server to be picked up.
 

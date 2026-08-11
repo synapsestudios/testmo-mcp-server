@@ -1,12 +1,22 @@
 {
-  "name": "testmo-mcp",
-  "version": "3.0.0",
+  "name": "@synapsestudios/testmo-mcp-server",
+  "version": "1.0.0",
   "description": "MCP server for Testmo test management platform",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/synapsestudios/testmo-mcp-server"
+  },
   "main": "dist/index.js",
+  "bin": {
+    "testmo-mcp-server": "dist/index.js"
+  },
+  "files": ["dist"],
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "dev": "ts-node src/index.ts"
+    "dev": "ts-node src/index.ts",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.30.0",
