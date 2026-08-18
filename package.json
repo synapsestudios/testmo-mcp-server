@@ -7,6 +7,9 @@
     "type": "git",
     "url": "https://github.com/synapsestudios/testmo-mcp-server"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "main": "dist/index.js",
   "bin": {
     "testmo-mcp-server": "dist/index.js"
