@@ -31,6 +31,7 @@ import { getAutomationCases } from "./tools/getAutomationCases";
 import { getAutomationRuns } from "./tools/getAutomationRuns";
 import { getAutomationRun } from "./tools/getAutomationRun";
 import { getAutomationSources } from "./tools/getAutomationSources";
+import { formatApiError } from "./testmoClient";
 
 // ---------------------------------------------------------------------------
 // Tool definitions
@@ -800,7 +801,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       content: [{ type: "text", text: JSON.stringify(result, null, 2) }],
     };
   } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
+    const message = formatApiError(error);
     return {
       content: [{ type: "text", text: `Error: ${message}` }],
       isError: true,
